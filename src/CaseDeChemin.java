@@ -3,11 +3,11 @@ public class CaseDeChemin extends Case{
         super();
     }
 
-    /*public boolean peutPasser(Pion pion){
-
+    public boolean peutPasser(Pion pion){
+        return super.peutPasser(pion);
     }
 
-    public boolean peutSArreter(Pion pion){
+    /*public boolean peutSArreter(Pion pion){
 
     }*/
 }

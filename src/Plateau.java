@@ -6,7 +6,9 @@ public class Plateau {
     protected ArrayList<CaseDeChemin> chemin;
 
     public Plateau() {
-        /*for(int indiceJoueur = 0; indiceJoueur < 4; indiceJoueur++) {
+
+
+        for(int indiceJoueur = 0; indiceJoueur < 4; indiceJoueur++) {
             for (int nbCase = 0; nbCase < 4; nbCase++) {
                 ecuries.add(new CaseEcurie(Couleur.values()[indiceJoueur]));
             }
@@ -23,7 +25,7 @@ public class Plateau {
             for (int nbCase = 0; nbCase < 56; nbCase++) {
                 chemin.add(new CaseDeChemin());
             }
-        }*/
+        }
     }
 
     public ArrayList<CaseEcurie> getEcuries(){
@@ -39,7 +41,10 @@ public class Plateau {
     }
 
     public void afficher(){
-
+        //System.out.println("\033[31;1mHello\033[0m, \033[32;1;2mworld!\033[0m");
+        for(int i=0; i<chemin.size(); i++){
+            System.out.println("\033[31;1mX\033[0m");
+        }
     }
 
     public void deplacerPionA(Pion pion, Case c){

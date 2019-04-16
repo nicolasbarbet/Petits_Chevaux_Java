@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 public class PetitsChevaux {
     public PetitsChevaux() {
 
@@ -14,6 +15,5 @@ public class PetitsChevaux {
         System.out.println("Combien de joueur ?");
         int nbJoueur = sc.nextInt();
         nvPartie.initialiserJoueur(nbJoueur);
-
     }
 }

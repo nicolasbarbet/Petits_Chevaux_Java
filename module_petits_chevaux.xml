@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_petits_chevaux" default="compile.module.petits_chevaux">
+  <dirname property="module.petits_chevaux.basedir" file="${ant.file.module_petits_chevaux}"/>
+  
+  <property name="module.jdk.home.petits_chevaux" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.petits_chevaux" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.petits_chevaux" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.petits_chevaux" value="-encoding UTF-8 -source 11 -target 11 ${compiler.args}"/>
+  
+  <property name="petits_chevaux.output.dir" value="${module.petits_chevaux.basedir}/out/production/Petits_Chevaux"/>
+  <property name="petits_chevaux.testoutput.dir" value="${module.petits_chevaux.basedir}/out/test/Petits_Chevaux"/>
+  
+  <path id="petits_chevaux.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="petits_chevaux.module.production.classpath">
+    <path refid="${module.jdk.classpath.petits_chevaux}"/>
+  </path>
+  
+  <path id="petits_chevaux.runtime.production.module.classpath">
+    <pathelement location="${petits_chevaux.output.dir}"/>
+  </path>
+  
+  <path id="petits_chevaux.module.classpath">
+    <path refid="${module.jdk.classpath.petits_chevaux}"/>
+    <pathelement location="${petits_chevaux.output.dir}"/>
+  </path>
+  
+  <path id="petits_chevaux.runtime.module.classpath">
+    <pathelement location="${petits_chevaux.testoutput.dir}"/>
+    <pathelement location="${petits_chevaux.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.petits_chevaux">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.petits_chevaux">
+    <patternset refid="excluded.from.module.petits_chevaux"/>
+  </patternset>
+  
+  <path id="petits_chevaux.module.sourcepath">
+    <dirset dir="${module.petits_chevaux.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.petits_chevaux" depends="compile.module.petits_chevaux.production,compile.module.petits_chevaux.tests" description="Compile module Petits_Chevaux"/>
+  
+  <target name="compile.module.petits_chevaux.production" depends="register.custom.compilers" description="Compile module Petits_Chevaux; production classes">
+    <mkdir dir="${petits_chevaux.output.dir}"/>
+    <javac2 destdir="${petits_chevaux.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.petits_chevaux}/javac">
+      <compilerarg line="${compiler.args.petits_chevaux}"/>
+      <bootclasspath refid="petits_chevaux.module.bootclasspath"/>
+      <classpath refid="petits_chevaux.module.production.classpath"/>
+      <src refid="petits_chevaux.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.petits_chevaux"/>
+    </javac2>
+    
+    <copy todir="${petits_chevaux.output.dir}">
+      <fileset dir="${module.petits_chevaux.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.petits_chevaux.tests" depends="register.custom.compilers,compile.module.petits_chevaux.production" description="compile module Petits_Chevaux; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.petits_chevaux" description="cleanup module">
+    <delete dir="${petits_chevaux.output.dir}"/>
+    <delete dir="${petits_chevaux.testoutput.dir}"/>
+  </target>
+</project>
